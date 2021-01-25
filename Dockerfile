@@ -1,5 +1,13 @@
-FROM node:7
+FROM node:14
 
-ADD src/app.js /app.js
+WORKDIR /usr/src/app
 
-ENTRYPOINT [ "node", "app.js"]
+COPY package*.json ./
+
+RUN npm install
+
+COPY . .
+
+EXPOSE 8080
+
+CMD [ "node", "src/app.js" ]
